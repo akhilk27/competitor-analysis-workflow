@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<style>
+
+/* ══════════════════════════════════════════════════════════════════
+   PAGE SETUP
+══════════════════════════════════════════════════════════════════ */
+@page {
+  size: A4;
+  margin: 18mm 16mm 22mm 16mm;
+
+  @bottom-left {
+    content: "{{ business_name }} \2014 Competitor Analysis \2014 {{ report_date }}";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #9CA3AF;
+  }
+
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #9CA3AF;
+  }
+}
+
+@page cover {
+  margin: 0;
+  @bottom-left  { content: none; }
+  @bottom-right { content: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════════════════════════ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: {{ body_font }};
+  font-size: 10pt;
+  color: #1a1a1a;
+  background: #ffffff;
+  line-height: 1.6;
+}
+
+h2 {
+  font-family: {{ heading_font }};
+  font-size: 16pt;
+  color: {{ primary_color }};
+  font-weight: bold;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: {{ heading_font }};
+  font-size: 12pt;
+  color: {{ primary_color }};
+  font-weight: bold;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+h4 {
+  font-family: {{ heading_font }};
+  font-size: 10.5pt;
+  color: #1a1a1a;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+p  { margin-bottom: 8px; color: #1a1a1a; font-size: 10pt; }
+ul { padding-left: 18px; margin-bottom: 8px; }
+li { margin-bottom: 4px; color: #1a1a1a; line-height: 1.55; font-size: 10pt; }
+
+/* ══════════════════════════════════════════════════════════════════
+   COVER PAGE
+══════════════════════════════════════════════════════════════════ */
+.cover {
+  page: cover;
+  width: 210mm;
+  height: 297mm;
+  background: #1D9E75;
+  position: relative;
+}
+
+.cover-top-stripe {
+  width: 100%;
+  height: 8px;
+  background: {{ accent_color }};
+}
+
+.cover-logo-area {
+  padding: 14mm 16mm 0;
+}
+
+.cover-logo {
+  max-height: 52px;
+  max-width: 170px;
+  display: block;
+  mix-blend-mode: multiply;
+  background: transparent;
+}
+
+.cover-logo-text {
+  display: block;
+  font-family: {{ heading_font }};
+  font-size: 20pt;
+  color: white;
+  font-weight: bold;
+}
+
+.cover-title-area {
+  padding: 30mm 16mm 0;
+}
+
+.cover-accent-bar {
+  width: 52px;
+  height: 5px;
+  background: {{ accent_color }};
+  margin-bottom: 16px;
+}
+
+.cover-h1 {
+  font-family: {{ heading_font }};
+  font-size: 40pt;
+  color: white;
+  font-weight: bold;
+  line-height: 1.0;
+  margin-bottom: 12px;
+}
+
+.cover-subtitle-text {
+  display: block;
+  font-family: {{ body_font }};
+  font-size: 12pt;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 0;
+}
+
+.cover-meta-area {
+  border-top: 1px solid rgba(255,255,255,0.25);
+  margin-left: 16mm;
+  margin-right: 16mm;
+  margin-top: 52mm;
+  padding-top: 14px;
+}
+
+.cover-meta-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.cover-meta-table td {
+  width: 50%;
+  padding: 6px 0;
+  vertical-align: top;
+}
+
+.cover-meta-label {
+  display: block;
+  font-family: {{ body_font }};
+  font-size: 7.5pt;
+  color: rgba(255,255,255,0.52);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+
+.cover-meta-value {
+  display: block;
+  font-family: {{ body_font }};
+  font-size: 10.5pt;
+  color: white;
+  font-weight: bold;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   TABLE OF CONTENTS
+══════════════════════════════════════════════════════════════════ */
+.toc {
+  page-break-before: always;
+}
+
+.toc-title {
+  font-family: {{ heading_font }};
+  font-size: 20pt;
+  color: {{ primary_color }};
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 3px solid {{ accent_color }};
+  margin-bottom: 20px;
+}
+
+.toc-group {
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9CA3AF;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 3px;
+}
+
+.toc-row {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-bottom: 1px dotted #D1D5DB;
+}
+
+.toc-row td {
+  padding: 5px 0;
+  font-size: 10pt;
+  color: #1a1a1a;
+  vertical-align: baseline;
+}
+
+.toc-row td.toc-num {
+  text-align: right;
+  width: 24px;
+  color: {{ primary_color }};
+  font-weight: bold;
+  font-size: 9.5pt;
+}
+
+.toc-sub td { padding-left: 12px; font-size: 9.5pt; color: #4B5563; }
+
+/* ══════════════════════════════════════════════════════════════════
+   SECTION CHROME
+══════════════════════════════════════════════════════════════════ */
+.section {
+  page-break-before: always;
+}
+
+.section-header {
+  border-left: 5px solid {{ accent_color }};
+  padding-left: 14px;
+  margin-bottom: 18px;
+}
+
+.section-header h2 { margin-bottom: 2px; }
+
+.section-subtext {
+  display: block;
+  font-size: 9.5pt;
+  color: #6B7280;
+  margin: 0;
+}
+
+.section-divider {
+  height: 1px;
+  background: #E5E7EB;
+  margin: 16px 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   STAT BOXES  (table-based, 3 columns)
+══════════════════════════════════════════════════════════════════ */
+.stat-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px 0;
+  margin-bottom: 18px;
+}
+
+.stat-box {
+  background: #F3F6FA;
+  border-radius: 6px;
+  padding: 14px 12px;
+  text-align: center;
+  border-top: 3px solid {{ accent_color }};
+  vertical-align: middle;
+}
+
+.stat-number {
+  display: block;
+  font-family: {{ heading_font }};
+  font-size: 30pt;
+  color: {{ primary_color }};
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 8pt;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   EXECUTIVE TAKEAWAY
+══════════════════════════════════════════════════════════════════ */
+.takeaway-box {
+  background: {{ primary_color }};
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.takeaway-headline {
+  display: block;
+  font-family: {{ heading_font }};
+  font-size: 12pt;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.takeaway-list {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.takeaway-list li {
+  color: rgba(255,255,255,0.88);
+  font-size: 9.5pt;
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   TWO-COLUMN INSIGHT BLOCKS  (table-based)
+══════════════════════════════════════════════════════════════════ */
+.two-col-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 12px 0;
+  margin-bottom: 4px;
+}
+
+.insights-block {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 13px 15px;
+  vertical-align: top;
+  width: 50%;
+}
+
+.insights-block-title {
+  display: block;
+  font-family: {{ heading_font }};
+  font-size: 10pt;
+  font-weight: bold;
+  color: {{ primary_color }};
+  padding-bottom: 7px;
+  border-bottom: 2px solid {{ accent_color }};
+  margin-bottom: 10px;
+}
+
+.insights-block ul { padding-left: 15px; margin: 0; }
+.insights-block li { font-size: 9.5pt; margin-bottom: 5px; color: #1a1a1a; line-height: 1.45; }
+.insights-block li strong { color: {{ primary_color }}; }
+
+/* ══════════════════════════════════════════════════════════════════
+   CALLOUT BOXES
+══════════════════════════════════════════════════════════════════ */
+.callout {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-left: 4px solid {{ secondary_color }};
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.callout-gap {
+  background: #FFFBEB;
+  border-color: #FDE68A;
+  border-left-color: {{ accent_color }};
+}
+
+.callout-title {
+  display: block;
+  font-weight: bold;
+  font-size: 9.5pt;
+  color: {{ primary_color }};
+  margin-bottom: 6px;
+}
+
+.callout p { font-size: 9.5pt; margin: 0; }
+
+/* ══════════════════════════════════════════════════════════════════
+   WHITESPACE OPPORTUNITIES
+══════════════════════════════════════════════════════════════════ */
+.opp-row {
+  width: 100%;
+  border-collapse: collapse;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.opp-row td { padding: 9px 0; vertical-align: top; }
+
+.opp-num-cell { width: 30px; }
+
+.opp-num {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: {{ accent_color }};
+  color: white;
+  text-align: center;
+  line-height: 24px;
+  font-size: 9pt;
+  font-weight: bold;
+  font-family: {{ heading_font }};
+}
+
+.opp-text { font-size: 10pt; color: #1a1a1a; line-height: 1.5; padding-left: 6px; }
+
+/* ══════════════════════════════════════════════════════════════════
+   COMPARISON TABLE
+══════════════════════════════════════════════════════════════════ */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 14px;
+  font-size: 9.5pt;
+}
+
+.comparison-table th {
+  background: {{ primary_color }};
+  color: white;
+  padding: 8px 7px;
+  text-align: center;
+  font-family: {{ heading_font }};
+  font-size: 7.5pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.35;
+}
+
+.comparison-table th:first-child {
+  text-align: left;
+  width: 18%;
+}
+
+.comparison-table td {
+  padding: 7px 7px;
+  border-bottom: 1px solid #E5E7EB;
+  text-align: center;
+  color: #1a1a1a;
+  font-size: 11pt;
+  line-height: 1;
+}
+
+.comparison-table td:first-child {
+  text-align: left;
+  font-weight: bold;
+  font-size: 9pt;
+  color: {{ primary_color }};
+  line-height: 1.3;
+}
+
+.comparison-table tr:nth-child(even) td {
+  background: #F9FAFB;
+}
+
+.check-yes     { color: #059669; font-weight: bold; }
+.check-no      { color: #DC2626; font-weight: bold; }
+.check-partial { color: #D97706; font-weight: bold; }
+
+.table-note {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  padding: 11px 14px;
+  font-size: 9.5pt;
+  color: #1a1a1a;
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   COMPETITOR CARDS
+══════════════════════════════════════════════════════════════════ */
+.comp-section-header {
+  page-break-before: always;
+}
+
+.competitor-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 15px 16px;
+  margin-bottom: 18px;
+  page-break-inside: avoid;
+}
+
+.comp-header-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #EEF2F7;
+}
+
+.comp-header-table td { vertical-align: middle; }
+
+.comp-rank-cell { width: 34px; text-align: right; }
+
+.comp-rank {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: {{ primary_color }};
+  color: white;
+  text-align: center;
+  line-height: 28px;
+  font-size: 11pt;
+  font-weight: bold;
+  font-family: {{ heading_font }};
+}
+
+.comp-name {
+  display: block;
+  font-family: {{ heading_font }};
+  font-size: 13pt;
+  color: {{ primary_color }};
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.comp-url {
+  display: block;
+  font-size: 8.5pt;
+  color: #6B7280;
+}
+
+.quick-take {
+  display: block;
+  font-style: italic;
+  font-size: 9.5pt;
+  color: #374151;
+  background: #F9FAFB;
+  border-left: 3px solid {{ accent_color }};
+  padding: 7px 11px;
+  margin-bottom: 11px;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.45;
+}
+
+.comp-fields-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 11px;
+}
+
+.comp-fields-table td {
+  width: 50%;
+  padding: 0 12px 8px 0;
+  vertical-align: top;
+}
+
+.comp-fields-table td:last-child { padding-right: 0; }
+
+.field-label {
+  display: block;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6B7280;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.field-value {
+  display: block;
+  font-size: 9.5pt;
+  color: #1a1a1a;
+  line-height: 1.45;
+}
+
+/* Strengths / Weaknesses two-column */
+.sw-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 8px 0;
+  margin-bottom: 10px;
+}
+
+.sw-block {
+  width: 50%;
+  padding: 9px 11px;
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.sw-strengths {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+}
+
+.sw-weaknesses {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+}
+
+.sw-label {
+  display: block;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.sw-strengths .sw-label { color: #065F46; }
+.sw-weaknesses .sw-label { color: #991B1B; }
+
+.sw-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sw-list li {
+  font-size: 9pt;
+  margin-bottom: 4px;
+  padding-left: 17px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.sw-strengths .sw-list li { color: #065F46; }
+.sw-weaknesses .sw-list li { color: #7F1D1D; }
+
+.sw-strengths .sw-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: #059669;
+}
+
+.sw-weaknesses .sw-list li::before {
+  content: "\2717";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: #DC2626;
+}
+
+.feature-tags { margin-top: 2px; }
+
+.feature-tag {
+  display: inline-block;
+  background: #EEF4FB;
+  color: #1E40AF;
+  border-radius: 3px;
+  padding: 2px 7px;
+  font-size: 8.5pt;
+  margin: 2px 3px 2px 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RECOMMENDATIONS
+══════════════════════════════════════════════════════════════════ */
+.priority-label {
+  display: inline-block;
+  font-family: {{ heading_font }};
+  font-size: 10pt;
+  font-weight: bold;
+  color: white;
+  padding: 4px 14px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-top: 16px;
+}
+
+.plabel-high   { background: #DC2626; }
+.plabel-medium { background: #D97706; }
+.plabel-low    { background: #2563EB; }
+
+.rec-card {
+  border: 1px solid #E5E7EB;
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  page-break-inside: avoid;
+}
+
+.rec-high   { border-left: 4px solid #DC2626; }
+.rec-medium { border-left: 4px solid #D97706; }
+.rec-low    { border-left: 4px solid #2563EB; }
+
+.rec-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-size: 7.5pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.rbadge-high   { background: #FEE2E2; color: #991B1B; }
+.rbadge-medium { background: #FEF3C7; color: #92400E; }
+.rbadge-low    { background: #DBEAFE; color: #1E40AF; }
+
+.rec-title {
+  display: inline;
+  font-family: {{ heading_font }};
+  font-size: 11pt;
+  font-weight: bold;
+  color: {{ primary_color }};
+  vertical-align: middle;
+}
+
+.rec-why {
+  display: block;
+  font-size: 9.5pt;
+  color: #374151;
+  line-height: 1.45;
+  margin-top: 6px;
+  margin-bottom: 7px;
+}
+
+.rec-actions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rec-actions li {
+  font-size: 9.5pt;
+  color: #1a1a1a;
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: 4px;
+  line-height: 1.45;
+}
+
+.rec-actions li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  color: {{ secondary_color }};
+  font-weight: bold;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   METHODOLOGY
+══════════════════════════════════════════════════════════════════ */
+.methodology-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 16px 18px;
+  font-size: 9.5pt;
+  color: #374151;
+  line-height: 1.65;
+}
+
+.methodology-box strong { color: #1a1a1a; }
+
+/* ══════════════════════════════════════════════════════════════════
+   UTILITIES
+══════════════════════════════════════════════════════════════════ */
+.page-break  { page-break-before: always; }
+.avoid-break { page-break-inside: avoid; }
+.mb-10 { margin-bottom: 10px; }
+.mb-16 { margin-bottom: 16px; }
+.mt-8  { margin-top: 8px; }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-top-stripe"></div>
+
+  <div class="cover-logo-area">
+    {% if logo_exists %}
+    <img src="{{ logo_path }}" class="cover-logo" alt="{{ business_name }}">
+    {% else %}
+    <span class="cover-logo-text">{{ business_name }}</span>
+    {% endif %}
+  </div>
+
+  <div class="cover-title-area">
+    <div class="cover-accent-bar"></div>
+    <div class="cover-h1">Competitor<br>Analysis<br>Report</div>
+    <span class="cover-subtitle-text">{{ report_title }}</span>
+  </div>
+
+  <div class="cover-meta-area">
+    <table class="cover-meta-table">
+      <tr>
+        <td>
+          <span class="cover-meta-label">Prepared For</span>
+          <span class="cover-meta-value">{{ business_name }}</span>
+        </td>
+        <td>
+          <span class="cover-meta-label">Industry</span>
+          <span class="cover-meta-value">{{ industry | title }}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="cover-meta-label">Report Date</span>
+          <span class="cover-meta-value">{{ report_date }}</span>
+        </td>
+        <td>
+          <span class="cover-meta-label">Competitors Analyzed</span>
+          <span class="cover-meta-value">{{ competitor_count }}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     TABLE OF CONTENTS
+══════════════════════════════════════════════════════════════════ -->
+<div class="toc section">
+  <div class="toc-title">Contents</div>
+
+  <div class="toc-group">Overview</div>
+  <table class="toc-row"><tr><td>Executive Summary</td><td class="toc-num">2</td></tr></table>
+  <table class="toc-row"><tr><td>Market Landscape &amp; Whitespace</td><td class="toc-num">3</td></tr></table>
+  <table class="toc-row"><tr><td>Competitor Comparison</td><td class="toc-num">4</td></tr></table>
+
+  <div class="toc-group">Competitor Profiles</div>
+  {% for comp in competitors %}
+  <table class="toc-row toc-sub"><tr><td>{{ loop.index }}. {{ comp.name }}</td><td class="toc-num">{{ loop.index + 4 }}</td></tr></table>
+  {% endfor %}
+
+  <div class="toc-group">Strategy</div>
+  <table class="toc-row"><tr><td>Recommendations for {{ business_name }}</td><td class="toc-num">{{ competitor_count + 5 }}</td></tr></table>
+  <table class="toc-row"><tr><td>Methodology</td><td class="toc-num">{{ competitor_count + 6 }}</td></tr></table>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EXECUTIVE SUMMARY
+══════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <h2>Executive Summary</h2>
+    <span class="section-subtext">Competitive landscape snapshot for {{ business_name }}</span>
+  </div>
+
+  <!-- Stat Cards -->
+  <table class="stat-table">
+    <tr>
+      <td class="stat-box">
+        <span class="stat-number">{{ competitor_count }}</span>
+        <span class="stat-label">Competitors Analyzed</span>
+      </td>
+      <td class="stat-box">
+        <span class="stat-number">{{ opportunity_count }}</span>
+        <span class="stat-label">Whitespace Opportunities</span>
+      </td>
+      <td class="stat-box">
+        <span class="stat-number">{{ high_priority_count }}</span>
+        <span class="stat-label">High-Priority Actions</span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Executive Takeaway -->
+  <div class="takeaway-box">
+    <span class="takeaway-headline">
+      {% if market_summary.whitespace_opportunities %}
+      {{ market_summary.whitespace_opportunities[0] }}
+      {% else %}
+      The market has clear gaps {{ business_name }} is positioned to fill.
+      {% endif %}
+    </span>
+    <ul class="takeaway-list">
+      {% for opp in market_summary.whitespace_opportunities[1:4] %}
+      <li>{{ opp }}</li>
+      {% endfor %}
+      <li>{{ high_priority_count }} high-priority actions identified to capture competitive advantage.</li>
+    </ul>
+  </div>
+
+  <!-- Key Insights + Immediate Actions -->
+  <table class="two-col-table">
+    <tr>
+      <td class="insights-block">
+        <span class="insights-block-title">Top Key Insights</span>
+        <ul>
+          {% for opp in market_summary.whitespace_opportunities[:5] %}
+          <li>{{ opp }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+      <td class="insights-block">
+        <span class="insights-block-title">Top 3 Immediate Actions</span>
+        <ul>
+          {% set ns = namespace(count=0) %}
+          {% for rec in recommendations %}
+            {% if rec.priority == 'high' and ns.count < 3 %}
+            <li><strong>{{ rec.area }}:</strong> {{ rec.suggested_action }}</li>
+            {% set ns.count = ns.count + 1 %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     MARKET LANDSCAPE
+══════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <h2>Market Landscape &amp; Whitespace</h2>
+    <span class="section-subtext">Unmet needs and shared gaps across the {{ industry }} market</span>
+  </div>
+
+  <div class="callout">
+    <span class="callout-title">What competitors do well &#8212; common strengths</span>
+    <p>{{ market_summary.common_strengths }}</p>
+  </div>
+
+  <div class="callout callout-gap">
+    <span class="callout-title">Shared gaps &#8212; weaknesses {{ business_name }} can exploit</span>
+    <p>{{ market_summary.common_weaknesses }}</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h3>Whitespace Opportunities</h3>
+  {% for item in market_summary.whitespace_opportunities %}
+  <table class="opp-row">
+    <tr>
+      <td class="opp-num-cell"><span class="opp-num">{{ loop.index }}</span></td>
+      <td class="opp-text">{{ item }}</td>
+    </tr>
+  </table>
+  {% endfor %}
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COMPETITOR COMPARISON TABLE
+══════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <h2>Competitor Comparison</h2>
+    <span class="section-subtext">
+      &#10003;&nbsp;present &nbsp;&nbsp; &#10007;&nbsp;absent &nbsp;&nbsp; ~&nbsp;partial
+    </span>
+  </div>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Pricing<br>Transparency</th>
+        <th>AI / Tech<br>Features</th>
+        <th>First-Time<br>Buyer Focus</th>
+        <th>Social<br>Proof</th>
+        <th>National<br>Coverage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for comp in competitors %}
+      {% set pm = (comp.pricing_model or '') | lower %}
+      {% set feats = ((comp.feature_highlights or []) + (comp.key_strengths or [])) | join(' ') | lower %}
+      {% set aud = (comp.target_audience or '') | lower %}
+      {% set pos = (comp.positioning or '') | lower %}
+      {% set mkt = (comp.marketing_angle or '') | lower %}
+
+      {% set has_pricing = pm | length > 5
+                        and 'not found' not in pm
+                        and 'unavailable' not in pm
+                        and 'no pricing' not in pm
+                        and 'not listed' not in pm
+                        and 'unclear' not in pm %}
+
+      {% set has_ai = 'ai' in feats or 'ai' in pos or 'ai' in mkt
+                   or 'machine learning' in feats
+                   or 'algorithm' in feats
+                   or 'automated' in feats
+                   or 'proptech' in pos
+                   or 'technology-driven' in pos %}
+
+      {% set first_time = 'first-time' in aud or 'first time' in aud
+                       or 'first-time' in pos or 'first time' in pos
+                       or 'first-time' in mkt %}
+
+      {% set has_social = comp.social_proof_signals and (comp.social_proof_signals | length) > 0 %}
+
+      {% set national = 'national' in feats or 'nationwide' in feats
+                     or 'national' in pos or 'nationwide' in pos
+                     or 'multiple states' in feats or 'major markets' in feats %}
+
+      <tr>
+        <td>{{ comp.name }}</td>
+        <td>
+          {% if has_pricing %}<span class="check-yes">&#10003;</span>
+          {% else %}<span class="check-no">&#10007;</span>{% endif %}
+        </td>
+        <td>
+          {% if has_ai %}<span class="check-yes">&#10003;</span>
+          {% else %}<span class="check-partial">~</span>{% endif %}
+        </td>
+        <td>
+          {% if first_time %}<span class="check-yes">&#10003;</span>
+          {% else %}<span class="check-no">&#10007;</span>{% endif %}
+        </td>
+        <td>
+          {% if has_social %}<span class="check-yes">&#10003;</span>
+          {% else %}<span class="check-no">&#10007;</span>{% endif %}
+        </td>
+        <td>
+          {% if national %}<span class="check-yes">&#10003;</span>
+          {% else %}<span class="check-partial">~</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="table-note">
+    <strong>Who wins where:</strong> Most players have tech features, but few combine pricing transparency with
+    an explicit first-time buyer focus. Social proof is strongest at Opendoor and Orchard. Coaching and
+    fee transparency &#8212; {{ business_name }}&#8217;s core differentiators &#8212; remain a clear gap across the field.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COMPETITOR PROFILES
+══════════════════════════════════════════════════════════════════ -->
+<div class="comp-section-header section">
+  <div class="section-header">
+    <h2>Competitor Profiles</h2>
+    <span class="section-subtext">In-depth breakdown of all {{ competitor_count }} competitors analyzed</span>
+  </div>
+
+  {% for comp in competitors %}
+  <div class="competitor-card avoid-break">
+
+    <!-- Header: Name + URL + Rank badge -->
+    <table class="comp-header-table">
+      <tr>
+        <td>
+          <span class="comp-name">{{ comp.name }}</span>
+          <span class="comp-url">{{ comp.url }}</span>
+        </td>
+        <td class="comp-rank-cell">
+          <span class="comp-rank">{{ loop.index }}</span>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Quick Take -->
+    <span class="quick-take">{{ comp.positioning }}</span>
+
+    <!-- Fields: Target Audience + Pricing / Marketing Angle + Social Proof -->
+    <table class="comp-fields-table">
+      <tr>
+        <td>
+          <span class="field-label">Target Audience</span>
+          <span class="field-value">{{ comp.target_audience }}</span>
+        </td>
+        <td>
+          <span class="field-label">Pricing Model</span>
+          <span class="field-value">{{ comp.pricing_model }}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="field-label">Marketing Angle</span>
+          <span class="field-value">{{ comp.marketing_angle }}</span>
+        </td>
+        <td>
+          {% if comp.social_proof_signals and comp.social_proof_signals | length > 0 %}
+          <span class="field-label">Social Proof</span>
+          <span class="field-value">{{ comp.social_proof_signals[:2] | join(' &bull; ') }}</span>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Strengths / Weaknesses -->
+    <table class="sw-table">
+      <tr>
+        <td class="sw-block sw-strengths">
+          <span class="sw-label">Strengths</span>
+          <ul class="sw-list">
+            {% for s in comp.key_strengths[:4] %}
+            <li>{{ s }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+        <td class="sw-block sw-weaknesses">
+          <span class="sw-label">Weaknesses</span>
+          <ul class="sw-list">
+            {% for w in comp.key_weaknesses[:4] %}
+            <li>{{ w }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Feature Tags -->
+    {% if comp.feature_highlights and comp.feature_highlights | length > 0 %}
+    <div>
+      <span class="field-label" style="display:block; margin-bottom:5px;">Feature Highlights</span>
+      <div class="feature-tags">
+        {% for f in comp.feature_highlights[:6] %}
+        <span class="feature-tag">{{ f }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  {% if not loop.last and loop.index % 2 == 0 %}
+  <div class="page-break"></div>
+  {% endif %}
+
+  {% endfor %}
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     RECOMMENDATIONS
+══════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <h2>Recommendations for {{ business_name }}</h2>
+    <span class="section-subtext">
+      {{ recommendations | length }} recommendations &#8212;
+      sorted by priority (high &#8594; medium &#8594; low)
+    </span>
+  </div>
+
+  {% set high_recs   = recommendations | selectattr('priority', 'equalto', 'high')   | list %}
+  {% set medium_recs = recommendations | selectattr('priority', 'equalto', 'medium') | list %}
+  {% set low_recs    = recommendations | selectattr('priority', 'equalto', 'low')    | list %}
+
+  {% if high_recs %}
+  <div class="priority-label plabel-high">&#9650;&nbsp; HIGH PRIORITY</div>
+  {% for rec in high_recs %}
+  <div class="rec-card rec-high avoid-break">
+    <span class="rec-badge rbadge-high">High</span><span class="rec-title">{{ rec.area }}</span>
+    <span class="rec-why">{{ rec.finding }}</span>
+    <ul class="rec-actions">
+      <li>{{ rec.suggested_action }}</li>
+    </ul>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if medium_recs %}
+  <div class="priority-label plabel-medium">&#9654;&nbsp; MEDIUM PRIORITY</div>
+  {% for rec in medium_recs %}
+  <div class="rec-card rec-medium avoid-break">
+    <span class="rec-badge rbadge-medium">Medium</span><span class="rec-title">{{ rec.area }}</span>
+    <span class="rec-why">{{ rec.finding }}</span>
+    <ul class="rec-actions">
+      <li>{{ rec.suggested_action }}</li>
+    </ul>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if low_recs %}
+  <div class="priority-label plabel-low">&#9654;&nbsp; LOW PRIORITY</div>
+  {% for rec in low_recs %}
+  <div class="rec-card rec-low avoid-break">
+    <span class="rec-badge rbadge-low">Low</span><span class="rec-title">{{ rec.area }}</span>
+    <span class="rec-why">{{ rec.finding }}</span>
+    <ul class="rec-actions">
+      <li>{{ rec.suggested_action }}</li>
+    </ul>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     METHODOLOGY
+══════════════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <h2>Methodology</h2>
+    <span class="section-subtext">How this report was generated</span>
+  </div>
+
+  <div class="methodology-box">
+    <p>
+      <strong>Competitor Discovery:</strong> Google Search via Serper API using targeted
+      site-specific queries for known {{ industry }} companies. Top {{ competitor_count }} unique
+      results selected after deduplication and root-domain normalization.
+    </p>
+    <p>
+      <strong>Content Scraping:</strong> Homepage, pricing, about, and feature pages extracted
+      via Firecrawl (clean markdown output; navigation and boilerplate filtered). Polite delays
+      between requests; partial results used gracefully where pages were unavailable.
+    </p>
+    <p>
+      <strong>Analysis:</strong> All scraped content sent to Claude (Anthropic) in a single
+      prompt to ensure consistent cross-competitor comparison &#8212; strengths, weaknesses,
+      positioning, pricing, and market-level recommendations tailored specifically to
+      {{ business_name }}.
+    </p>
+    <p>
+      <strong>Limitations:</strong> Based on publicly available website content as of
+      {{ report_date }}. Pricing may not reflect enterprise tiers or negotiated rates.
+      Comparison table dimensions are inferred from scraped content and may not capture
+      all product capabilities.
+    </p>
+    <p style="margin-bottom:0;"><strong>Run ID:</strong> {{ run_id }}</p>
+  </div>
+</div>
+
+</body>
+</html>

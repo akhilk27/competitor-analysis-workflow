@@ -1,0 +1,39 @@
+{
+  "business": {
+    "name": "NovaNest Realty",
+    "description": "Tech-forward residential real estate agency serving first-time homebuyers in mid-sized U.S. cities. We simplify the homebuying process through AI-powered property matching, transparent pricing tools, and dedicated buyer coaches. We close deals 30% faster than traditional agents with zero hidden fees.",
+    "industry": "residential real estate agency",
+    "target_audience": "first-time homebuyers in mid-sized U.S. cities",
+    "website": "https://yourwebsite.com",
+    "founded_year": 2023
+  },
+  "brand": {
+    "primary_color": "#1A3C5E",
+    "secondary_color": "#2E7D9F",
+    "accent_color": "#F4A827",
+    "background_color": "#FFFFFF",
+    "text_color": "#1F2937",
+    "muted_color": "#6B7280",
+    "logo": "assets/brand/logo.png",
+    "logo_dark": null,
+    "heading_font": "Georgia, serif",
+    "body_font": "Arial, sans-serif",
+    "custom_fonts": false,
+    "font_files": {
+      "heading": null,
+      "body": null
+    }
+  },
+  "report_preferences": {
+    "max_competitors": 8,
+    "include_pricing_analysis": true,
+    "include_content_strategy": true,
+    "include_recommendations": true,
+    "report_title_template": "Competitor Analysis Report &#8212; {month} {year}"
+  },
+  "search": {
+    "location": "United States",
+    "language": "en",
+    "exclude_domains": ["reddit.com", "quora.com", "stackoverflow.com", "yelp.com", "bbb.org", "perch.com"]
+  }
+}

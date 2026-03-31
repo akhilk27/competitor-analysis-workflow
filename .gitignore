@@ -1,0 +1,29 @@
+# Secrets — never commit
+.env
+
+# Intermediate pipeline output — regenerated each run
+.tmp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Google OAuth tokens
+credentials.json
+token.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
