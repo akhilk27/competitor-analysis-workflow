@@ -11,7 +11,7 @@ Given a business description and brand configuration, the pipeline:
 1. **Discovers** up to 8 competitor websites using targeted Google searches (via Serper)
 2. **Scrapes** homepage, pricing, about, and features pages from each competitor (via Firecrawl)
 3. **Analyzes** all scraped content with Claude to produce structured per-competitor profiles, a market landscape summary, whitespace opportunities, and prioritized recommendations
-4. **Generates** a branded, consulting-style PDF report with your logo, colors, and fonts
+4. **Generates** a branded, consulting-style PDF report with your brand colors and fonts
 
 Every step writes an intermediate JSON file, making each step independently restartable. If Step 3 fails, re-run only Step 3 — no credits are burned re-fetching data you already have.
 
@@ -75,7 +75,7 @@ Every step writes an intermediate JSON file, making each step independently rest
 ├── assets/
 │   ├── brand/
 │   │   ├── brand.json              # Business info + brand colors/fonts (edit this first)
-│   │   └── logo.png                # Your logo — embedded as base64 in the PDF
+│   │   └── logo.png                # Brand logo — embedded as base64 in the PDF
 │   └── templates/
 │       └── report_template.html    # Jinja2 HTML template for the PDF report
 │
@@ -195,10 +195,6 @@ Open `assets/brand/brand.json` and fill in your business details:
 }
 ```
 
-### 5. Add your logo
-
-Place your logo file at `assets/brand/logo.png`. PNG with a transparent background works best on the dark-colored cover page. If no logo is provided, the company name is used as a text fallback.
-
 ---
 
 ## Running the Pipeline
@@ -305,10 +301,6 @@ The cover page title line is set in `brand.json`:
 ```
 
 `{month}` and `{year}` are substituted at render time. Use `&#8212;` for an em dash — avoid raw Unicode characters, which wkhtmltopdf may misread on Windows.
-
-### Logo
-
-Replace `assets/brand/logo.png` with your own. The logo is read at render time, encoded as a base64 data URI, and embedded directly in the HTML so it renders correctly in both wkhtmltopdf and browser print-to-PDF. Recommended specs: PNG, transparent background, max 400×150px.
 
 ### Report Layout
 
