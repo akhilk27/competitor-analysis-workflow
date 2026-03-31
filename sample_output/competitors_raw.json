@@ -1,0 +1,80 @@
+{
+  "run_id": "2026-03-30T20-29-44",
+  "generated_at": "2026-03-30T20:29:44.244601",
+  "business_name": "NovaNest Realty",
+  "industry": "residential real estate agency",
+  "competitors": [
+    {
+      "name": "Flyhomes: Buy your next home before you sell \u2013 move once",
+      "url": "https://flyhomes.com/",
+      "domain": "flyhomes.com",
+      "search_rank": 1,
+      "query": "site:opendoor.com OR site:orchard.com OR site:homeward.com OR site:flyhomes.com OR site:knock.com",
+      "snippet": "Buy your next home before selling the current one \u2013 no rushed sales or double moves. Built for homebuyers, agents, and loan officers alike.",
+      "rank": 1
+    },
+    {
+      "name": "Real Estate & Homes For Sale",
+      "url": "https://orchard.com/homes",
+      "domain": "orchard.com",
+      "search_rank": 2,
+      "query": "site:opendoor.com OR site:orchard.com OR site:homeward.com OR site:flyhomes.com OR site:knock.com",
+      "snippet": "Our Home Match quiz will score every home on the market to help you find the right one. Great, let's begin. Where are you looking to buy your ...",
+      "rank": 2
+    },
+    {
+      "name": "Homeward",
+      "url": "https://www.homeward.com/",
+      "domain": "homeward.com",
+      "search_rank": 4,
+      "query": "site:opendoor.com OR site:orchard.com OR site:homeward.com OR site:flyhomes.com OR site:knock.com",
+      "snippet": "This lets us know which side of the homebuying process you're on, so we can help you get started with Homeward. I'm a home buyer \u00b7 I'm a real estate agent ...",
+      "rank": 3
+    },
+    {
+      "name": "Investor Relations",
+      "url": "https://opendoor.com/",
+      "domain": "opendoor.com",
+      "search_rank": 6,
+      "query": "site:opendoor.com OR site:orchard.com OR site:homeward.com OR site:flyhomes.com OR site:knock.com",
+      "snippet": "The Investor Relations website contains information about Opendoor Technologies Inc.'s business for stockholders, potential investors, and financial ...",
+      "rank": 4
+    },
+    {
+      "name": "Knock Bridge Loan\u2122: Use the money \u201ctied up\u201d in your current home ...",
+      "url": "https://www.knock.com/",
+      "domain": "knock.com",
+      "search_rank": 7,
+      "query": "site:opendoor.com OR site:orchard.com OR site:homeward.com OR site:flyhomes.com OR site:knock.com",
+      "snippet": "Buy before you sell. Knock enables you to use the money \u201ctied up\u201d in your current home to purchase your next one. Get started. Our first ...",
+      "rank": 5
+    },
+    {
+      "name": "Ribbon Home: Alternative Home Loans For Buyers & Agents",
+      "url": "https://ribbonhome.com/",
+      "domain": "ribbonhome.com",
+      "search_rank": 1,
+      "query": "site:ribbonhome.com OR site:divvyhomes.com OR site:perch.com OR site:landis.com OR site:newzip.com",
+      "snippet": "Ribbon provides alternative home financing \u2014 from Buy Before You Sell to Bridge Loans, as well as creative ways to access your equity. Our financing programs ...",
+      "rank": 6
+    },
+    {
+      "name": "Newzip",
+      "url": "https://newzip.com/",
+      "domain": "newzip.com",
+      "search_rank": 5,
+      "query": "site:ribbonhome.com OR site:divvyhomes.com OR site:perch.com OR site:landis.com OR site:newzip.com",
+      "snippet": "A home concierge service with SAFE HomeRewards. A better homebuying and selling experience that saves you money.",
+      "rank": 7
+    },
+    {
+      "name": "Landis: Rent to Own your Home and Become a Homeowner",
+      "url": "https://www.landis.com/",
+      "domain": "landis.com",
+      "search_rank": 7,
+      "query": "site:ribbonhome.com OR site:divvyhomes.com OR site:perch.com OR site:landis.com OR site:newzip.com",
+      "snippet": "Your Path to Homeownership. Landis helps renters transition into homeowners by coaching them on building up their finances to get a mortgage and buy a home.",
+      "rank": 8
+    }
+  ]
+}
