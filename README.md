@@ -135,7 +135,7 @@ Three services are required:
 | `SERPER_API_KEY` | Serper (Google Search) | [serper.dev](https://serper.dev) | 2,500 free searches/month |
 | `FIRECRAWL_API_KEY` | Firecrawl (web scraper) | [firecrawl.dev](https://firecrawl.dev) | 500 free scrapes/month |
 
-A full pipeline run uses ~3 Serper searches, ~24 Firecrawl scrapes, and ~50–80K Claude tokens (~$1.50–$2.50).
+A full pipeline run uses approximately 3 Serper searches, 24 Firecrawl scrapes, and 50–80K Claude tokens ($1.50–$2.50).
 
 ### PDF Generation (Windows)
 
